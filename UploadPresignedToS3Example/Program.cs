@@ -12,13 +12,14 @@ namespace UploadPresignedToS3Example
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Input presigned url:");
-            var presignedUrl = Console.ReadLine();
+            var presignedUrl = "PUT YOUR SIGNED URL HERE";
+
+            Console.WriteLine($"presigned url: {presignedUrl}");
 
 
-            Console.WriteLine("fileToUpload:");
-            var filePath = Console.ReadLine();
-
+            Console.WriteLine("Reading file to upload:");
+            var filePath = (new FileInfo("Test.bmp")).FullName;
+            
             try
             {
                 UploadObject(presignedUrl, filePath);
@@ -33,6 +34,7 @@ namespace UploadPresignedToS3Example
             }
         }
 
+        // code from this page: https://docs.aws.amazon.com/AmazonS3/latest/userguide/PresignedUrlUploadObject.html
         private static void UploadObject(string url, string filePath)
         {
             HttpWebRequest httpRequest = WebRequest.Create(url) as HttpWebRequest;
